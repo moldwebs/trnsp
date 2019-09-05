@@ -14,7 +14,7 @@ before_script:
 
  - composer install --prefer-source --no-interaction --dev
 
-script: phpunit
+script: php bin/phpunit
 
 language: php
 
@@ -44,8 +44,15 @@ install:
 
 # Run script
 script:
- - phpunit
+ - php bin/phpunit
 
 # After a build, send email notification with the build results
 notifications:
  email: moldwebs@gmail.com
+
+
+deploy:
+  provider: heroku
+  app: trnsp
+  api_key:
+    secure: $HEROKUKEY
