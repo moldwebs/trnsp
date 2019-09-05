@@ -1,0 +1,8 @@
+{% for field, input_type in fields %}
+    {% set get_req = app.request.get('filters') %}
+    {% if input_type == 'date' %}
+        <input class="form-control input-xs fltrs datetimepicker" data-min-view="2" data-date-format="yyyy-mm-dd" type="text" value="{{ get_req[field] is defined ? get_req[field] : '' }}" name="filters[{{ field }}]" placeholder="" />
+    {% else %}
+        <input class="form-control input-xs fltrs" type="text" value="{{ get_req[field] is defined ? get_req[field] : '' }}" name="filters[{{ field }}]" placeholder="" />
+    {% endif %}
+{% endfor %}

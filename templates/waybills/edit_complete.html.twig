@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}
+    {{ page_title|trans }}
+{% endblock %}
+
+{% form_theme form 'bootstrap_form.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default panel-border-color panel-border-color-primary">
+                <div class="panel-body">
+
+                    {{ form_start(form, {'attr': {'class': 'group-border-dashed'}}) }}
+
+                    <div>&nbsp;</div>
+
+                    {{ form_widget(form) }}
+
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="col-sm-10 text-center">
+                                <button type="submit" class="btn btn-space btn-primary">{{ 'Submit'|trans }}</button>
+                                <button type="button" class="btn btn-space btn-default">{{ 'Cancel'|trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

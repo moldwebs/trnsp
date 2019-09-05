@@ -1,0 +1,130 @@
+easy_admin:
+    entities:
+        Trip:
+            class: App\Entity\Trip
+            list:
+                fields:
+                    - days
+                    - hour_start
+                    - location
+                    - terminal
+                    - destination
+                    - plan
+                    - venit
+                    - fisa_lunara
+            form:
+                fields:
+                    - transport_type
+                    - days
+                    - location
+                    - terminal
+                    - destination
+                    - plan
+                    - venit
+                    - motorina
+                    - fisa_lunara
+                    - hour_start
+                    - hour_end
+                    - work_hours
+                    - supl_hours
+        TripWay:
+            class: App\Entity\TripWay
+            list:
+                fields:
+                    - location
+                    - terminal
+                    - destination
+                    - ore_lucru
+                    - motorina
+                    - distanta
+                    - venit
+            form:
+                fields:
+                    - transport_type
+                    - location
+                    - terminal
+                    - destination
+                    - ore_lucru
+                    - motorina
+                    - distanta
+                    - venit
+        Driver:
+            class: App\Entity\Driver
+            list:
+                fields:
+                    - name
+            form:
+                fields:
+                    - name
+                    - nr_matricol
+                    - idnp
+                    - data_nasterii
+                    - termen_permis
+                    - termen_medic
+                    - termen_narcolog
+                    - termen_competenta
+                    - termen_procura
+        Transport:
+            class: App\Entity\Transport
+            list:
+                fields:
+                    - title
+                    - owner
+            form:
+                fields:
+                    - type
+                    - title
+                    - owner
+                    - model
+                    - model_fp
+                    - vin_cod
+                    - anul
+                    - consum
+                    - kilometraj
+                    - termen_asigurare
+                    - termen_testare
+        Owner:
+            class: App\Entity\Owner
+            list:
+                fields:
+                    - name
+            form:
+                fields:
+                    - name
+        Destination:
+            class: App\Entity\Destination
+            list:
+                fields:
+                    - title
+            form:
+                fields:
+                    - title
+        Location:
+            class: App\Entity\Location
+            list:
+                fields:
+                    - title
+            form:
+                fields:
+                    - title
+        Terminal:
+            class: App\Entity\Terminal
+            list:
+                fields:
+                    - title
+                    - diagrama_procente
+            form:
+                fields:
+                    - title
+                    - diagrama_procente
+        User:
+            class: App\Entity\User
+            form:
+                fields:
+                    - username
+                    - email
+                    - enabled
+                    - lastLogin
+                    # if administrators are allowed to edit users' passwords and roles, add this:
+                    - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_OPERATOR': 'ROLE_OPERATOR', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }

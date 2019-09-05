@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}
+    {{ 'Foi de parcurs'|trans  }}{{ (sub_page_title is defined ? ' ' ~ sub_page_title : '')|trans }} ({{ pagination.getTotalItemCount }})
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default panel-table">
+                <div class="panel-body">
+
+                    <div class="row be-datatable-body">
+                        <div class="col-sm-12">
+                            <table id="table2" class="table table-striped table-hover table-bordered table-fw-widget">
+                                <thead>
+                                <tr>
+                                    <th style="width: 100px;">{{ knp_pagination_sortable(pagination, 'Data', 'q.date_start') }}</th>
+                                    <th colspan="2" style="width: 85px;">{{ knp_pagination_sortable(pagination, 'Ora', 'q.hour_start') }}</th>
+                                    <th style="width: 100px;">{{ knp_pagination_sortable(pagination, 'n.FP', 'q.numar_fp') }}</th>
+                                    <th style="width: 100px;">{{ knp_pagination_sortable(pagination, 'n.BEB', 'q.numar_beb') }}</th>
+                                    <th style="width: 100px;">{{ knp_pagination_sortable(pagination, 'Eliberata', 'q.createdAt') }}</th>
+                                    <th style="width: 250px;">{{ knp_pagination_sortable(pagination, 'Sofer', 'driver.name') }}</th>
+                                    <th style="width: 110px;">{{ knp_pagination_sortable(pagination, 'Transport', 'transport.title') }}</th>
+                                    <th style="">{{ knp_pagination_sortable(pagination, 'Localitate', 'location.title') }}</th>
+                                    <th style="">{{ knp_pagination_sortable(pagination, 'Ruta', 'destination.title') }}</th>
+                                    <th style="width: 90px;">{{ knp_pagination_sortable(pagination, 'Plan', 'q.plan') }}</th>
+                                    <th style="width: 90px;">{{ knp_pagination_sortable(pagination, 'Plan F', 'q.plan_defacto') }}</th>
+                                    <th style="width: 90px;">{{ knp_pagination_sortable(pagination, 'Plan B', 'q.plan_brut') }}</th>
+                                    <th style="width: 50px;">{{ knp_pagination_sortable(pagination, 'M', 'q.motorina') }}</th>
+                                    <th style="width: 20px;"></th>
+                                    <th style="text-align: right; width: 150px;">
+                                        <button mx_href="{{ path('waybills-edit') }}" class="btn btn-rounded btn-primary btn-sm"><i class="icon icon-left mdi mdi-playlist-plus"></i> {{ 'Adauga FP'|trans }}</button>
+                                    </th>
+                                </tr>
+                                <form method="get" action="">
+                                <tr class="fltrs-tr">
+                                    <th>
+                                        {{ knp_pagination_filter(pagination, {'q.date_start': 'date'}) }}
+                                    </th>
+                                    <th colspan="2"></th>
+                                    <th>
+                                        {{ knp_pagination_filter(pagination, {'q.numar_fp': 'input'}) }}
+                                    </th>
+                                    <th>
+                                        {{ knp_pagination_filter(pagination, {'q.numar_beb': 'input'}) }}
+                                    </th>
+                                    <th>
+                                        {{ knp_pagination_filter(pagination, {'q.createdAt': 'input'}) }}
+                                    </th>
+                                    <th>
+                                        {{ knp_pagination_filter(pagination, {'driver.name': 'driver'}) }}
+                                    </th>
+                                    <th>
+                                        {{ knp_pagination_filter(pagination, {'transport.title': 'transport'}) }}
+                                    </th>
+                                    <th>
+                                        {{ knp_pagination_filter(pagination, {'location.title': 'location'}) }}
+                                    </th>
+                                    <th>
+                                        {{ knp_pagination_filter(pagination, {'destination.title': 'destination'}) }}
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th style="text-align: center;">
+                                        <button type="submit" class="btn btn-default"><i class="icon icon-left mdi mdi-search"></i></button>
+                                    </th>
+                                </tr>
+                                </form>
+                                </thead>
+                                <tbody>
+                                {% for item in pagination %}
+                                <tr>
+                                    <td style="text-align: center;">{{ item.date_start|date("d.m.Y") }}</td>
+                                    <td style="text-align: center; width: 65px;">
+                                        {{ item.hour_start|date("H:i") }}
+                                    </td>
+                                    <td style="text-align: center; width: 16px;">
+                                        {% if item.supl_hours is not empty %}
+                                            <span data-toggle="tooltip" class="glyphicon glyphicon-time" title="{{ item.supl_hours }}"></span>
+                                        {% endif %}
+                                    </td>
+                                    <td style="text-align: center;">{{ item.seria }}{{ item.numar_fp }}</td>
+                                    <td style="text-align: center;">{{ item.numar_beb }}</td>
+                                    <td style="text-align: center;">{{ item.createdAt|date("d.m.Y") }}</td>
+                                    <td>{{ item.driver }}</td>
+                                    <td>{{ item.transport }}</td>
+                                    <td>{{ item.location }}</td>
+                                    <td>{{ item.destination }}</td>
+                                    <td>{{ item.plan }}</td>
+                                    <td>{{ item.plan_defacto }}</td>
+                                    <td>{{ item.plan_brut }}</td>
+                                    <td>{{ item.motorina }}</td>
+                                    <td>
+                                        {% if item.notes is not empty %}
+                                        <i data-toggle="tooltip" title="{{ item.notes }}" class="icon icon-left mdi mdi-info-outline"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <div class="btn-group btn-hspace">
+                                            {% if app.request.get('_route') == 'waybills-incomplete' %}
+                                                <button mx_href="{{ path('waybills-edit-complete', {'id': item.id}) }}" class="btn btn-rounded btn-success btn-sm"><i class="icon icon-left mdi mdi-open-in-new"></i> {{ 'Completeaza'|trans }}</button>
+                                            {% else %}
+                                                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">{{ 'Actiuni'|trans }} <span class="icon-dropdown mdi mdi-chevron-down"></span></button>
+                                                <ul role="menu" class="dropdown-menu">
+                                                    <li><a class="mx_ajx_win" href="{{ path('waybills-view', {'id': item.id}) }}">{{ 'Deschide'|trans }}</a></li>
+                                                    {% if item.tp == '1' %}
+                                                    <li><a href="{{ path('waybills-edit', {'id': item.id}) }}">{{ 'Editeaza'|trans }}</a></li>
+                                                    <li><a class="mx_href_confirm" href="{{ path('waybills-delete', {'id': item.id}) }}">{{ 'Elimina'|trans }}</a></li>
+                                                    {% else %}
+                                                    <li><a href="{{ path('waybills-edit-complete', {'id': item.id}) }}">{{ 'Diagrame'|trans }}</a></li>
+                                                    {% endif %}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row be-datatable-footer">
+                        <div class="col-sm-5"></div>
+                        <div class="col-sm-7 text-right">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

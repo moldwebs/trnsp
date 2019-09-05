@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-primary">
+            <div class="panel-body">
+
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'DATA PLECARE'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.date_start|date("d.m.Y") }}</div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'DATA SOSIRE'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.date_end|date("d.m.Y") }}</div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'NUMAR FOAIE PARCURS'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.seria }}{{ item.numar_fp }}</div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'LOCALITATE'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.location }}</div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'DESTINATIE'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.destination }}</div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'SOFER'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.driver }}</div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'TRANSPORT'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.transport }}</div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'MOTORINA'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.motorina }}</div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'MOTORINA PLECARE'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.motorina_rest }}</div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'ORE LUCRU'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.ore_lucru|date("H:i") }}</div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-5"><b>{{ 'NOTITE'|trans }}</b></div>
+                        <div class="col-sm-7">{{ item.notes }}</div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
