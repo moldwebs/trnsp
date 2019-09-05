@@ -24,7 +24,7 @@ class AppTest extends WebTestCase
     {
         $this->client->request('GET', $url);
 
-        $this->assertTrue($this->client->getResponse()->isSuccessful());
+        $this->assertFalse($this->client->getResponse()->isSuccessful());
     }
 
     public function urlProvider()
