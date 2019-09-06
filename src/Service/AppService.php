@@ -3,8 +3,6 @@
 namespace App\Service;
 
 use Doctrine\ORM\EntityManager;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
